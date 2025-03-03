@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35728.132
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVS_Project", "OVS_Project\OVS_Project.csproj", "{70BF4ED1-65FD-4EE1-8393-0F9FFD3ABE9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OVS_Test", "OVS_Test\OVS_Test.csproj", "{BA2406EE-22E9-47AF-99D8-634B9E5B90FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70BF4ED1-65FD-4EE1-8393-0F9FFD3ABE9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70BF4ED1-65FD-4EE1-8393-0F9FFD3ABE9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70BF4ED1-65FD-4EE1-8393-0F9FFD3ABE9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70BF4ED1-65FD-4EE1-8393-0F9FFD3ABE9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA2406EE-22E9-47AF-99D8-634B9E5B90FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA2406EE-22E9-47AF-99D8-634B9E5B90FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA2406EE-22E9-47AF-99D8-634B9E5B90FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA2406EE-22E9-47AF-99D8-634B9E5B90FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

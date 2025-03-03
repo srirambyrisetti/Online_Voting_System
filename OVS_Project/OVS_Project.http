@@ -1,0 +1,6 @@
+@OVS_Project_HostAddress = http://localhost:5210
+
+GET {{OVS_Project_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
