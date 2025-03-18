@@ -1,0 +1,15 @@
+<div class="dashboard-container">
+  <nav class="navbar">
+    <h2>Admin Dashboard</h2>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </nav>
+
+  <div class="dashboard-content">
+    <button (click)="navigateTo('admin-election')" class="btn">Election</button>
+    <button (click)="navigateTo('admin-candidates')" class="btn">
+      Candidate
+    </button>
+    <button (click)="navigateTo('admin-result')" class="btn">Results</button>
+    <button (click)="navigateTo('admin-voters')" class="btn">Voters</button>
+  </div>
+</div>

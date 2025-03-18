@@ -1,0 +1,55 @@
+.vote-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.vote-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.vote-container label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.vote-container select,
+.vote-container button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.vote-container button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.vote-container button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .vote-container {
+    padding: 10px;
+  }
+
+  .vote-container h2 {
+    font-size: 18px;
+  }
+
+  .vote-container select,
+  .vote-container button {
+    font-size: 14px;
+  }
+}

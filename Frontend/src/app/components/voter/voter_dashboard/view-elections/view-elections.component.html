@@ -1,0 +1,12 @@
+<div class="elections-container">
+  <h2>Available Elections</h2>
+  <div class="election-list">
+    <div *ngFor="let election of elections" class="election-card">
+      <h3>{{ election.title }}</h3>
+      <p><strong>Election ID:</strong> {{ election.electionId }}</p>
+      <p><strong>Title:</strong> {{ election.title }}</p>
+      <p><strong>Start Date:</strong> {{ election.startDate }}</p>
+      <p><strong>End Date:</strong> {{ election.endDate }}</p>
+    </div>
+  </div>
+</div>

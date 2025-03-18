@@ -1,0 +1,40 @@
+<div *ngIf="elections.length > 0">
+  <label>Select Election:</label>
+  <select [(ngModel)]="selectedElection" (change)="fetchResults()">
+    <option *ngFor="let election of elections" [value]="election.electionId">
+      {{ election.title }}
+    </option>
+  </select>
+</div>
+
+<div class="winner-banner">
+  <marquee *ngIf="winnerMessage" behavior="scroll" direction="left">
+    <h2 class="winner-text">{{ winnerMessage }}</h2>
+  </marquee>
+</div>
+
+<div class="result-container">
+  <h2>Election Results</h2>
+
+  <div *ngFor="let result of electionResults" class="constituency-card">
+    <h3>{{ result.constituency }}</h3>
+    <div class="card-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Candidate Name</th>
+            <th>Party</th>
+            <th>Vote Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let candidate of result.candidates">
+            <td>{{ candidate.candidateName }}</td>
+            <td>{{ candidate.partyName }}</td>
+            <td>{{ candidate.voteCount }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

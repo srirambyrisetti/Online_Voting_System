@@ -15,10 +15,12 @@ namespace OVS_Project.Controllers
     {
         private readonly AppDbContext _context;
         private readonly TokenService _tokenService;
-        public VoterController(AppDbContext context, TokenService tokenService)
+        private readonly ILogger<VoteController> _logger;
+        public VoterController(AppDbContext context, TokenService tokenService, ILogger<VoteController> logger)
         {
             _context = context;
             _tokenService = tokenService;
+            _logger = logger;
         }
         [HttpGet("AllVoters")]
         public async Task<IActionResult> ViewVoters()
@@ -57,6 +59,8 @@ namespace OVS_Project.Controllers
             return Ok(new { VoterId = voter.VoterId });
         }
 
+
+
         private string GenerateUniqueVoterId()
         {
             const string prefix = "AP40CA";
@@ -84,11 +88,24 @@ namespace OVS_Project.Controllers
             }
         }
 
-        // Voter login
+        //// Voter login
+        //[HttpPost("login")]
+        //public IActionResult Login([FromBody] LoginDto loginDto)
+        //{
+        //    var voter = _context.Users.SingleOrDefault(u => u.Email == loginDto.Email && u.Password == loginDto.Password && u.Role == "Voter");
+
+        //    if (voter == null)
+        //    {
+        //        return Unauthorized();
+        //    }
+
+        //    var token = _tokenService.GenerateToken(voter.Username, voter.Role);
+        //    return Ok(new { Token = token });
+        //}
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto loginDto)
         {
-            var voter = _context.Users.SingleOrDefault(u => u.Email == loginDto.Email && u.Password == loginDto.Password && u.Role == "Voter");
+            var voter = _context.Voters.SingleOrDefault(u => u.Email == loginDto.Email && u.Password == loginDto.Password && u.Role == "Voter");
 
             if (voter == null)
             {
@@ -96,7 +113,19 @@ namespace OVS_Project.Controllers
             }
 
             var token = _tokenService.GenerateToken(voter.Username, voter.Role);
-            return Ok(new { Token = token });
+
+            var returnData = new
+            {
+                userid = voter.UserId,
+                Username = voter.Username,
+                Email = voter.Email,
+                Constituency = voter.Constituency,
+                Role = "Voter",
+                VoterId = voter.VoterId,
+                jwttoken = token
+            };
+
+            return Ok(returnData);
         }
 
         // View all elections

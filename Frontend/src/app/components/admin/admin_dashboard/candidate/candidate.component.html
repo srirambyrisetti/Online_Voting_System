@@ -1,0 +1,70 @@
+<div class="candidate-container">
+  <h2>Candidate Management</h2>
+
+  <!-- Candidate Form -->
+  <form
+    [formGroup]="candidateForm"
+    (ngSubmit)="onSubmit()"
+    class="candidate-form"
+  >
+    <!-- <label>Election ID:</label>
+    <input type="text" formControlName="electionId" required /> -->
+    <div *ngIf="elections.length > 0" class="leaderboard-select-dropdown">
+      <label>Select Election</label>
+      <select [(ngModel)]="selectedElection" formControlName="electionId">
+        <option
+          *ngFor="let election of elections"
+          [value]="election.electionId"
+          selected
+        >
+          {{ election.title }}
+        </option>
+      </select>
+    </div>
+
+    <label>Name:</label>
+    <input type="text" formControlName="name" required />
+
+    <label>Party Name:</label>
+    <input type="text" formControlName="partyName" required />
+
+    <label>Constituency:</label>
+    <input type="text" formControlName="constituency" required />
+
+    <button type="submit">
+      {{ editIndex === null ? "Add Candidate" : "Update Candidate" }}
+    </button>
+  </form>
+
+  <!-- Candidate List -->
+  <h3>Candidate List</h3>
+  <table class="candidate-table">
+    <thead>
+      <tr>
+        <th>Candidate ID</th>
+        <th>Election ID</th>
+        <th>Name</th>
+        <th>Party Name</th>
+        <th>Constituency</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let candidate of candidates; let i = index">
+        <td>{{ candidate.candidateId }}</td>
+        <td>{{ candidate.electionId }}</td>
+        <td>{{ candidate.name }}</td>
+        <td>{{ candidate.party }}</td>
+        <td>{{ candidate.constituency }}</td>
+        <td>
+          <button
+            (click)="deleteCandidate(candidate.candidateId)"
+            class="delete-btn"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

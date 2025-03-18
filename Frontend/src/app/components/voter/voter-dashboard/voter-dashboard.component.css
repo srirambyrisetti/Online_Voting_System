@@ -1,0 +1,39 @@
+.dashboard-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background: #333;
+  color: white;
+  padding: 15px;
+}
+
+.logout-btn {
+  background: red;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  margin-top: 20px;
+}
+
+.btn {
+  display: block;
+  width: 200px;
+  margin: 10px auto;
+  padding: 15px;
+  background: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #218838;
+}

@@ -7,7 +7,7 @@ using OVS_Project.Models;
 
 namespace OVS_Project.Controllers
 {
-    [Authorize(Roles ="Admin")]
+   // [Authorize(Roles ="Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CandidateController : ControllerBase
@@ -90,6 +90,31 @@ namespace OVS_Project.Controllers
             await _context.SaveChangesAsync();
             return Ok(new { message = "Candidate created successfully" });
         }
+
+        // Get candidates by election ID
+        [HttpGet("ByElection/{electionId}")]
+        public async Task<IActionResult> GetCandidatesByElection(int electionId)
+        {
+            var candidates = await _context.Candidates
+                .Where(c => c.ElectionId == electionId)
+                .Select(c => new CandidateDto
+                {
+                    CandidateId = c.CandidateId,
+                    Name = c.Name,
+                    Party = c.Party,
+                    ElectionId = c.ElectionId,
+                    Constituency = c.Constituency
+                })
+                .ToListAsync();
+
+            if (candidates == null || !candidates.Any())
+            {
+                return NotFound(new { message = "No candidates found for the given election ID" });
+            }
+
+            return Ok(candidates);
+        }
+
 
         // Update an existing candidate
         [HttpPut("{id}")]

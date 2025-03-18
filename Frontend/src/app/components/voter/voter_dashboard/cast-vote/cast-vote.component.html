@@ -1,0 +1,44 @@
+<div class="vote-container">
+  <h2>Cast Your Vote</h2>
+  <form [formGroup]="voteForm" (ngSubmit)="castVote()">
+    <div *ngIf="elections.length === 0">No elections are being conducted</div>
+    <div *ngIf="elections.length > 0">
+      <label for="election">Select Election:</label>
+      <select
+        id="election"
+        formControlName="electionId"
+        (change)="fetchCandidates()"
+      >
+        <option
+          *ngFor="let election of elections"
+          [value]="election.electionId"
+        >
+          {{ election.title }}
+        </option>
+      </select>
+    </div>
+    <ng-container *ngIf="candidates.length === 0; else showCandidates">
+      No candidates found in your constituency for this Election
+    </ng-container>
+    <!-- [(ngModel)]="selectedCandidateId" -->
+    <ng-template #showCandidates>
+      <label for="candidate">Select Candidate:</label>
+      <select id="candidate" formControlName="candidateId">
+        <option
+          *ngFor="let candidate of candidates"
+          [value]="candidate.candidateId"
+        >
+          {{ candidate.name }} - {{ candidate.party }}
+        </option>
+      </select>
+    </ng-template>
+
+    <button
+      *ngIf="elections.length > 0 && candidates.length > 0"
+      type="submit"
+      [disabled]="voteForm.invalid"
+    >
+      Vote
+    </button>
+  </form>
+</div>

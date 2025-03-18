@@ -1,0 +1,68 @@
+<div class="register-container">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Select User Type -->
+    <label>User Type:</label>
+    <select formControlName="userType" (change)="onUserTypeChange()">
+      <option value="">Select</option>
+      <option value="Admin">Admin</option>
+      <option value="Voter">Voter</option>
+    </select>
+
+    <!-- Admin Fields -->
+    <div *ngIf="registerForm.value.userType === 'Admin'">
+      <label>Username:</label>
+      <input
+        type="text"
+        formControlName="username"
+        placeholder="Enter Username"
+      />
+    </div>
+
+    <!-- Common Fields -->
+    <label>Email:</label>
+    <input type="email" formControlName="email" placeholder="Enter Email" />
+    <label>Password:</label>
+    <input
+      type="password"
+      formControlName="password"
+      placeholder="Enter Password"
+    />
+
+    <!-- Voter-Specific Fields -->
+    <div *ngIf="registerForm.value.userType === 'Voter'">
+      <label>Name:</label>
+      <input type="text" formControlName="name" placeholder="Enter Name" />
+      <label>Date of Birth:</label>
+      <input type="date" formControlName="dob" (change)="calculateAge()" />
+      <label>Age:</label>
+      <input type="text" formControlName="age" readonly />
+      <label>Address:</label>
+      <input
+        type="text"
+        formControlName="address"
+        placeholder="Enter Address"
+      />
+      <label>Phone Number:</label>
+      <input
+        type="text"
+        formControlName="phone"
+        placeholder="Enter Phone Number"
+      />
+      <label>Gender:</label>
+      <select formControlName="gender">
+        <option value="">Select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+      <label>Constituency:</label>
+      <input
+        type="text"
+        formControlName="constituency"
+        placeholder="Enter Constituency"
+      />
+    </div>
+
+    <button type="submit" [disabled]="registerForm.invalid">Register</button>
+  </form>
+</div>

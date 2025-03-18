@@ -1,0 +1,30 @@
+.container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #333;
+  color: white;
+}
+
+.nav-links .btn {
+  margin-left: 10px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.nav-links .btn:hover {
+  background-color: #0056b3;
+}
+
+.content {
+  margin-top: 50px;
+}

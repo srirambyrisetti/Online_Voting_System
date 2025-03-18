@@ -1,0 +1,14 @@
+<div class="history-container">
+  <h2>Your Voting History</h2>
+
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+
+  <ul *ngIf="voteHistory.length > 0">
+    <li *ngFor="let vote of voteHistory" class="history-item">
+      You voted for <strong>{{ vote.candidateName }}</strong> in
+      <strong>{{ vote.electionTitle }}</strong>
+    </li>
+  </ul>
+</div>

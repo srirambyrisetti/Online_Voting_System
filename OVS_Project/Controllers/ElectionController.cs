@@ -7,9 +7,140 @@ using OVS_Project.Models;
 
 namespace OVS_Project.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
+    //public class ElectionController : ControllerBase
+    //{
+    //    private readonly AppDbContext _context;
+
+    //    public ElectionController(AppDbContext context)
+    //    {
+    //        _context = context;
+    //    }
+
+    //    // Get all elections
+    //    [HttpGet]
+    //    public async Task<IActionResult> GetElections()
+    //    {
+    //        var elections = await _context.Elections
+    //            .Select(e => new ElectionDto
+    //            {
+    //                ElectionId = e.ElectionId,
+    //                Title = e.Title,
+    //                StartDate = e.StartDate,
+    //                EndDate = e.EndDate
+    //            })
+    //            .ToListAsync();
+    //        return Ok(elections);
+    //    }
+
+    //    // Get election by ID
+    //[HttpGet("{id}")]
+    //public async Task<IActionResult> GetElection(int id)
+    //{
+    //    var election = await _context.Elections
+    //        .Select(e => new ElectionDto
+    //        {
+    //            ElectionId = e.ElectionId,
+    //            Title = e.Title,
+    //            StartDate = e.StartDate,
+    //            EndDate = e.EndDate
+    //        })
+    //        .FirstOrDefaultAsync(e => e.ElectionId == id);
+
+    //    if (election == null)
+    //    {
+    //        return NotFound();
+    //    }
+    //    return Ok(election);
+    //}
+
+    //    // Create a new election
+    //    //[HttpPost]
+    //    //public async Task<IActionResult> CreateElection(ElectionDto createElectionDto)
+    //    //{
+    //    //    var election = new Election
+    //    //    {
+    //    //        Title = createElectionDto.Title,
+    //    //        StartDate = createElectionDto.StartDate,
+    //    //        EndDate = createElectionDto.EndDate
+    //    //    };
+
+    //    //    _context.Elections.Add(election);
+    //    //    await _context.SaveChangesAsync();
+    //    //    return Ok(new { message = "Election created successfully" });
+    //    //}
+    //    [HttpPost]
+    //    public async Task<IActionResult> CreateElection(ElectionDto createElectionDto)
+    //    {
+    //        var election = new Election
+    //        {
+    //            Title = createElectionDto.Title,
+    //            StartDate = createElectionDto.StartDate,
+    //            EndDate = createElectionDto.EndDate
+    //        };
+
+    //        _context.Elections.Add(election);
+    //        await _context.SaveChangesAsync();
+
+    //        // Return the created election
+    //        return CreatedAtAction(nameof(GetElection), new { id = election.ElectionId }, election);
+    //    }
+
+    //    // Update an existing election
+    //    [HttpPut("{id}")]
+    //    public async Task<IActionResult> UpdateElection(int id, ElectionDto electionDto)
+    //    {
+    //        var election = await _context.Elections.FindAsync(id);
+    //        if (election == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        election.Title = electionDto.Title;
+    //        election.StartDate = electionDto.StartDate;
+    //        election.EndDate = electionDto.EndDate;
+
+    //        _context.Elections.Update(election);
+    //        await _context.SaveChangesAsync();
+    //        return Ok(new { message = "Election updated successfully" });
+    //    }
+
+    //    // Delete an election
+    //    [HttpDelete("{id}")]
+    //    public async Task<IActionResult> DeleteElection(int id)
+    //    {
+    //        var election = await _context.Elections.FindAsync(id);
+    //        if (election == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        _context.Elections.Remove(election);
+    //        await _context.SaveChangesAsync();
+    //        return Ok(new { message = "Election deleted successfully" });
+    //    }
+
+    // Get election results
+    //[HttpGet("{id}/results")]
+    // public async Task<IActionResult> GetElectionResults(int id)
+    // {
+    //     var results = await _context.Votes
+    //         .Where(v => v.Candidate.ElectionId == id)
+    //         .GroupBy(v => v.Candidate.Name)
+    //         .Select(g => new
+    //         {
+    //             CandidateName = g.Key,
+    //             VoteCount = g.Count()
+    //         })
+    //         .ToListAsync();
+
+    //     return Ok(results);
+    // }
+
+    // Get election results by constituency
+
     public class ElectionController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -23,49 +154,25 @@ namespace OVS_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> GetElections()
         {
-            var elections = await _context.Elections
-                .Select(e => new ElectionDto
-                {
-                    ElectionId = e.ElectionId,
-                    Title = e.Title,
-                    StartDate = e.StartDate,
-                    EndDate = e.EndDate
-                })
-                .ToListAsync();
+            var elections = await _context.Elections.ToListAsync();
             return Ok(elections);
-        }
-
-        // Get election by ID
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetElection(int id)
-        {
-            var election = await _context.Elections
-                .Select(e => new ElectionDto
-                {
-                    ElectionId = e.ElectionId,
-                    Title = e.Title,
-                    StartDate = e.StartDate,
-                    EndDate = e.EndDate
-                })
-                .FirstOrDefaultAsync(e => e.ElectionId == id);
-
-            if (election == null)
-            {
-                return NotFound();
-            }
-            return Ok(election);
         }
 
         // Create a new election
         [HttpPost]
-        public async Task<IActionResult> CreateElection(ElectionDto createElectionDto)
+        public async Task<IActionResult> CreateElection([FromBody] ElectionDto electiondto)
         {
+            if (electiondto == null)
+            {
+                return BadRequest();
+            }
             var election = new Election
             {
-                Title = createElectionDto.Title,
-                StartDate = createElectionDto.StartDate,
-                EndDate = createElectionDto.EndDate
+                Title = electiondto.Title,
+                StartDate = electiondto.StartDate,
+                EndDate = electiondto.EndDate
             };
+
 
             _context.Elections.Add(election);
             await _context.SaveChangesAsync();
@@ -74,19 +181,18 @@ namespace OVS_Project.Controllers
 
         // Update an existing election
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateElection(int id, ElectionDto electionDto)
+        public async Task<IActionResult> UpdateElection(int id, [FromBody] ElectionDto electiondto)
         {
-            var election = await _context.Elections.FindAsync(id);
-            if (election == null)
+            var existingElection = await _context.Elections.FindAsync(id);
+            if (existingElection == null)
             {
                 return NotFound();
             }
 
-            election.Title = electionDto.Title;
-            election.StartDate = electionDto.StartDate;
-            election.EndDate = electionDto.EndDate;
+            existingElection.Title = electiondto.Title;
+            existingElection.StartDate = electiondto.StartDate;
+            existingElection.EndDate = electiondto.EndDate;
 
-            _context.Elections.Update(election);
             await _context.SaveChangesAsync();
             return Ok(new { message = "Election updated successfully" });
         }
@@ -106,24 +212,6 @@ namespace OVS_Project.Controllers
             return Ok(new { message = "Election deleted successfully" });
         }
 
-       // Get election results
-       //[HttpGet("{id}/results")]
-       // public async Task<IActionResult> GetElectionResults(int id)
-       // {
-       //     var results = await _context.Votes
-       //         .Where(v => v.Candidate.ElectionId == id)
-       //         .GroupBy(v => v.Candidate.Name)
-       //         .Select(g => new
-       //         {
-       //             CandidateName = g.Key,
-       //             VoteCount = g.Count()
-       //         })
-       //         .ToListAsync();
-
-       //     return Ok(results);
-       // }
-
-        // Get election results by constituency
         [HttpGet("results/{electionId}")]
         public async Task<IActionResult> GetElectionResults(int electionId)
         {
@@ -160,6 +248,7 @@ namespace OVS_Project.Controllers
 
             return Ok(groupedResults);
         }
+
 
         // Get election winner
         [HttpGet("winner/{electionId}")]

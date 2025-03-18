@@ -7,7 +7,7 @@ using OVS_Project.Models;
 
 namespace OVS_Project.Controllers
 {
-    [Authorize(Roles = "Voter")]
+   // [Authorize(Roles = "Voter")]
     [Route("api/[controller]")]
     [ApiController]
     public class VoteController : ControllerBase

@@ -1,0 +1,49 @@
+<div class="voter-container">
+  <h2>Voter Management</h2>
+  <div *ngIf="selectedVoter" class="edit-form">
+    <h3>Edit Voter</h3>
+    <form [formGroup]="editForm">
+      <label>Username:</label>
+      <input formControlName="username" />
+      <label>Email:</label>
+      <input formControlName="email" />
+      <label>Age:</label>
+      <input formControlName="age" type="number" />
+      <label>Constituency:</label>
+      <input formControlName="constituency" />
+      <label>Address:</label>
+      <input formControlName="address" />
+      <label>Gender:</label>
+      <input formControlName="gender" />
+      <label>Voter ID:</label>
+      <input formControlName="voterId" readonly />
+
+      <button class="save-btn" type="button" (click)="saveVoter()">Save</button>
+    </form>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Constituency</th>
+        <th>Address</th>
+        <th>Gender</th>
+        <th>Voter ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let voter of voters">
+        <td>{{ voter.username }}</td>
+        <td>{{ voter.email }}</td>
+        <td>{{ voter.age }}</td>
+        <td>{{ voter.constituency }}</td>
+        <td>{{ voter.address }}</td>
+        <td>{{ voter.gender }}</td>
+        <td>{{ voter.voterId }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

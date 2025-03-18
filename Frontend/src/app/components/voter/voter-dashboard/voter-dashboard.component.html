@@ -1,0 +1,18 @@
+<div class="dashboard-container">
+  <nav class="navbar">
+    <h2>Voter Dashboard</h2>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </nav>
+
+  <div class="dashboard-content">
+    <!-- <button routerLink="/vote" class="btn">Vote Now</button> -->
+    <button (click)="navigateTo('view-election')" class="btn">
+      View Elections
+    </button>
+    <button (click)="navigateTo('cast-vote')" class="btn">Vote Now</button>
+
+    <button (click)="navigateTo('vote-history')" class="btn">
+      Vote History
+    </button>
+  </div>
+</div>

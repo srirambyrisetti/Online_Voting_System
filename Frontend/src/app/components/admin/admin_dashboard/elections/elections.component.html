@@ -1,0 +1,66 @@
+<div class="election-container">
+  <h2>Election Management</h2>
+  <div class="election-content">
+    <!-- Left Side: Election Form -->
+    <div class="election-form">
+      <h3>
+        {{ editingElectionId !== null ? "Update Election" : "Add Election" }}
+      </h3>
+      <form [formGroup]="electionForm" (ngSubmit)="submitElection()">
+        <label for="title">Election Title:</label>
+        <input id="title" type="text" formControlName="title" required />
+
+        <label for="startDate">Start Date:</label>
+        <input
+          id="startDate"
+          type="date"
+          formControlName="startDate"
+          required
+        />
+
+        <label for="endDate">End Date:</label>
+        <input id="endDate" type="date" formControlName="endDate" required />
+
+        <button type="submit">
+          {{ editingElectionId !== null ? "Update Election" : "Add Election" }}
+        </button>
+      </form>
+    </div>
+
+    <!-- Right Side: Elections List -->
+    <div class="election-list">
+      <h3>Available Elections</h3>
+      <table *ngIf="elections.length > 0">
+        <thead>
+          <tr>
+            <th>ElectionId</th>
+            <th>Title</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let election of elections">
+            <td>{{ election.electionId }}</td>
+            <td>{{ election.title }}</td>
+            <td>{{ election.startDate | date : "yyyy-MM-dd" }}</td>
+            <td>{{ election.endDate | date : "yyyy-MM-dd" }}</td>
+            <td>
+              <button class="edit-btn" (click)="editElection(election)">
+                Edit
+              </button>
+              <button
+                class="delete-btn"
+                (click)="deleteElection(election.electionId)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="elections.length === 0">No elections available.</p>
+    </div>
+  </div>
+</div>
